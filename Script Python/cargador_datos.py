@@ -23,7 +23,7 @@ PARAMETROS_ESCALARES = [
 
 PARAMETROS_MATERIAL = [
     "d_anual_m", "gamma_m", "dist_m", "eT_m", "eA_m",
-    "h_m", "s_m", "c_m", "n_m", "β_min", "β_max", "rho_m"
+    "h_m", "s_m", "c_m", "n_m", "beta_min", "beta_max", "rho_m"
 ]
 
 PARAMETROS_ETAPA = ["f_s", "v_min_s", "dur_s"]
