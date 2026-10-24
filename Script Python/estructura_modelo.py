@@ -54,8 +54,8 @@ class DatosModelo:
         self.s_m = mat["s_m"]
         self.c_m = mat["c_m"]
         self.n_m = mat["n_m"]
-        self.beta_min = mat["β_min"]
-        self.beta_max = mat["β_max"]
+        self.beta_min = mat["beta_min"]
+        self.beta_max = mat["beta_max"]
         self.rho_m = mat["rho_m"]
 
         # Parámetros indexados por Etapa (s in S)
