@@ -2,7 +2,7 @@
 estructura_modelo.py
 Módulo encargado de instanciar los conjuntos, parámetros del modelo y las variables de decisión en Gurobi.
 """
-from gurobipy import GRB
+from gurobipy import GRB # type: ignore
 
 
 class DatosModelo:
