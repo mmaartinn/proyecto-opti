@@ -3,3 +3,5 @@
 /.venv39
 
 ../__pycache__
+
+*.zip

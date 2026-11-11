@@ -2,13 +2,13 @@
 restricciones_objetivo.py
 Módulo que agrega las 14 familias de restricciones y la Función Objetivo al modelo Gurobi.
 """
-from gurobipy import GRB, quicksum
+from gurobipy import GRB, quicksum # type: ignore
 from estructura_modelo import DatosModelo
 
 
 def agregar_restricciones(model, data: DatosModelo, vars_dict):
     """
-    Agrega las restricciones (1) a (14) de acuerdo con la formulación matemática del Informe 2.
+    Agrega las restricciones (1) a (14) de acuerdo con la formulación matemática del Informe final (Informe 3).
     """
     M, P, T, S = data.M, data.P, data.T, data.S
     x = vars_dict["x"]
@@ -102,13 +102,16 @@ def agregar_restricciones(model, data: DatosModelo, vars_dict):
         name="R09_volumen_anual_ingreso"
     )
 
-    # (10) Capacidad volumétrica cancha [t]
+    # (10) Capacidad volumétrica de cancha por posición [p, t]
+    # Supuesto 11 del informe final: la capacidad volumétrica c^E_t se distribuye
+    # equitativamente entre las |P| posiciones (factor 1/|P|) y solo aplica si la
+    # posición está ocupada (a_pt).
     model.addConstrs(
         (quicksum(
             data.phi_ms[m, s] * data.delta[tau, s, t] * x[m, p, tau]
-            for p in P for m in M for tau in T if tau <= t for s in S
-        ) <= data.cE_t[t]
-         for t in T),
+            for m in M for tau in T if tau <= t for s in S
+        ) <= (data.cE_t[t] / len(P)) * a[p, t]
+         for p in P for t in T),
         name="R10_cap_volumetrica_cancha"
     )
 
